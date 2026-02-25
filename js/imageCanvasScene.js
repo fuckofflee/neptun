@@ -2,8 +2,13 @@ import { CONFIG } from './config.js';
 import { PROJECTS } from './projects.js';
 import { getCurrentLanguage } from './languageState.js';
 
-function loadFonts() {
-  if (document.getElementById('canvas-fonts')) return;
+async function loadFonts() {
+  if (document.getElementById('canvas-fonts')) {
+    // Fonts already added, but wait for them to load
+    await document.fonts.ready;
+    return;
+  }
+  
   const style = document.createElement('style');
   style.id = 'canvas-fonts';
   let css = '';
@@ -12,10 +17,13 @@ function loadFonts() {
   });
   style.innerHTML = css;
   document.head.appendChild(style);
+  
+  // CRITICAL: Wait for fonts to actually load before continuing
+  await document.fonts.ready;
 }
 
-export function launchCanvasScene(imageSrc, renderer, onCloseCallback, projectIndex) {
-  loadFonts();
+export async function launchCanvasScene(imageSrc, renderer, onCloseCallback, projectIndex) {
+  await loadFonts(); // WAIT for fonts to load
 
   renderer.domElement.style.display    = 'none';
   renderer.domElement.style.visibility = 'hidden';
@@ -139,10 +147,13 @@ export function launchCanvasScene(imageSrc, renderer, onCloseCallback, projectIn
 async function loadMediaAndCreate(container, folderPath, project, closeCallback) {
   let found = [];
   if (project.mediaFiles && Array.isArray(project.mediaFiles)) {
-    // Use mediaFiles directly without checking - faster load
     found = project.mediaFiles.map(f => folderPath + f);
+    const verified = [];
+    for (const path of found) {
+      if (await mediaExists(path)) verified.push(path);
+    }
+    found = verified;
   } else {
-    // Fallback: try common patterns (images will fail gracefully if missing)
     const patterns = [
       'cover.jpg', 'cover.png',
       ...Array.from({ length: 30 }, (_, i) => `detail${i + 1}.jpg`),
@@ -154,8 +165,9 @@ async function loadMediaAndCreate(container, folderPath, project, closeCallback)
       ...Array.from({ length: 30 }, (_, i) => `image${i + 1}.mp4`),
       ...Array.from({ length: 30 }, (_, i) => `image${i + 1}.mov`),
     ];
-    // Just add all patterns - browser will handle 404s
-    found = patterns.map(p => folderPath + p);
+    for (const p of patterns) {
+      if (await mediaExists(folderPath + p)) found.push(folderPath + p);
+    }
   }
   found.sort();
 
@@ -171,6 +183,22 @@ async function loadMediaAndCreate(container, folderPath, project, closeCallback)
   }));
 
   buildLayout(container, media, project, closeCallback);
+}
+
+function mediaExists(url) {
+  return new Promise(resolve => {
+    if (url.endsWith('.mov') || url.endsWith('.mp4')) {
+      const v = document.createElement('video');
+      v.onloadedmetadata = () => resolve(true);
+      v.onerror          = () => resolve(false);
+      v.src = url;
+    } else {
+      const i = new Image();
+      i.onload  = () => resolve(true);
+      i.onerror = () => resolve(false);
+      i.src = url;
+    }
+  });
 }
 
 function buildLayout(container, media, project, closeCallback) {
