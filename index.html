@@ -2,11 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Léon River's portfolio</title>
-
+  <link rel="icon" type="image/x-icon" href="./img/neptun.ico">
   <link rel="stylesheet" href="css/reset.css" />
   <link rel="stylesheet" href="css/style.css" />
-
+  
+  <!-- AUTO-SCALE FIX: Prevent scrollbars on any screen -->
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  
   <!-- IMPORT MAP (THIS FIXES EVERYTHING) -->
   <script type="importmap">
   {
@@ -16,13 +28,14 @@
   }
   </script>
 </head>
-    <link rel="icon" type="image/x-icon" href="./img/neptun.ico">
-    <title>Your Title</title>
-</head>
-
 <body>
   <canvas id="webgl"></canvas>
-
+  
+  <!-- Your main script -->
   <script type="module" src="js/mainScene.js"></script>
+  
+  <!-- AUTO-SCALE SCRIPT - Must be last! -->
+  <script src="js/auto-scale.js"></script>
+  
 </body>
 </html>
