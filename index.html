@@ -51,6 +51,77 @@
 </head>
 <body>
   <canvas id="webgl"></canvas>
+  
+  <!-- ========================================================================
+       🔧 DEBUG OVERLAY - TEMPORARY FOR TESTING ONLY 🔧
+       
+       This shows pixel ratio information on each device/browser.
+       Use it to verify the adaptive scaling is working correctly.
+       
+       ⚠️ DELETE THIS ENTIRE SECTION AFTER TESTING ⚠️
+       Delete from the line below that says "DELETE FROM HERE"
+       to the line that says "DELETE TO HERE"
+       
+       ======================================================================== -->
+  <!-- DELETE FROM HERE ===================================================== -->
+  <div id="debug-info" style="
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #00ff00;
+    padding: 15px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    z-index: 99999;
+    border-radius: 8px;
+    line-height: 1.8;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    border: 2px solid #00ff00;
+  ">
+    <div style="font-weight: bold; margin-bottom: 8px; font-size: 14px;">🔍 DEVICE DEBUG INFO</div>
+    <div>Screen: <span id="screen-size" style="color: #ffff00;"></span></div>
+    <div>Device Pixel Ratio: <span id="device-ratio" style="color: #ffff00;"></span></div>
+    <div>Target Ratio: <span id="target-ratio" style="color: #00ffff;">2.0</span></div>
+    <div>Normalized Ratio: <span id="normalized-ratio" style="color: #ff00ff;"></span></div>
+    <div>Browser: <span id="browser-name" style="color: #ffff00;"></span></div>
+    <div style="margin-top: 8px; font-size: 11px; color: #888;">
+      ⚠️ Remove this overlay after testing
+    </div>
+  </div>
+
+  <script>
+    // Display current device info
+    function updateDebugInfo() {
+      document.getElementById('screen-size').textContent = 
+        window.innerWidth + 'x' + window.innerHeight;
+      
+      const deviceRatio = window.devicePixelRatio || 1;
+      document.getElementById('device-ratio').textContent = deviceRatio.toFixed(2);
+      
+      const targetRatio = 2.0;
+      const normalizedRatio = targetRatio / deviceRatio;
+      document.getElementById('normalized-ratio').textContent = normalizedRatio.toFixed(2);
+      
+      // Detect browser
+      const userAgent = navigator.userAgent;
+      let browserName = 'Unknown';
+      if (userAgent.includes('Edg')) browserName = 'Edge';
+      else if (userAgent.includes('Chrome')) browserName = 'Chrome';
+      else if (userAgent.includes('Safari')) browserName = 'Safari';
+      else if (userAgent.includes('Firefox')) browserName = 'Firefox';
+      document.getElementById('browser-name').textContent = browserName;
+    }
+    
+    // Initial call
+    updateDebugInfo();
+    
+    // Update on resize
+    window.addEventListener('resize', updateDebugInfo);
+  </script>
+  <!-- DELETE TO HERE ====================================================== -->
+  
+  
   <script type="module" src="js/mainScene.js"></script>
 </body>
 </html>
