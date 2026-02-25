@@ -1,21 +1,21 @@
 // About Page Content
 export const ABOUT = {
   en: {
-    title: 'léon river\nmartin-bergot\n\nfrench canadian\nproduct designer\n\n++digital design \nstudent (m1)\nensaama paris',
+    title: 'léon river\nmartin-bergot\n\nfrench canadian\nproduct designer\n\n++digital design \nstudent\nensaama paris',
   },
   fr: {
     title: 'léon river\nmartin-bergot\n\ndesigner produit\nfranco canadien\n\n++étudiant en \nmaster design \nnumérique\nensaama paris',
   },
-  fontSize: '85px',
+  fontSize: 'clamp(32px, 6vw, 85px)',  // Responsive: scales with screen size
   fontFamily: 'TitleFont',
   fontWeight: 'bold',
   color: '#000000',
   textAlign: 'left',
-  letterSpacing: '-5px',
+  letterSpacing: 'clamp(-3px, -0.5vw, -5px)',  // Responsive
   lineHeight: '0.85',
-  marginTop: '20px',
-  marginBottom: '40px',
-  marginLeft: '20px',
+  marginTop: 'clamp(10px, 2vw, 20px)',  // Responsive
+  marginBottom: 'clamp(20px, 3vw, 40px)',  // Responsive
+  marginLeft: 'clamp(10px, 2vw, 20px)',  // Responsive
 };
 
 // Contact Page Content
@@ -26,16 +26,16 @@ export const CONTACT = {
   fr: {
     title: 'mail:leonmartinbergot@hotmail.com\ntel:+33 6 52 08 05 88\nig:@neptunhuh\nPARIS\n\n\n\n\n\n\n\n\nen recherche de stage\ncontactezmoisvp',
   },
-  fontSize: '85px',
+  fontSize: 'clamp(32px, 6vw, 85px)',  // Responsive
   fontFamily: 'TitleFont',
   fontWeight: 'bold',
   color: '#000000',
   textAlign: 'left',
-  letterSpacing: '-5px',
+  letterSpacing: 'clamp(-3px, -0.5vw, -5px)',  // Responsive
   lineHeight: '0.85',
-  marginTop: '20px',
-  marginBottom: '40px',
-  marginLeft: '20px',
+  marginTop: 'clamp(10px, 2vw, 20px)',  // Responsive
+  marginBottom: 'clamp(20px, 3vw, 40px)',  // Responsive
+  marginLeft: 'clamp(10px, 2vw, 20px)',  // Responsive
 };
 
 // Global Default Styles (Fallback)
@@ -145,7 +145,7 @@ export const PROJECTS = [
     },
     description: {
       en: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n@icewaves is a series of photographs taken on a frozen lake near my hometown in Canada. Its intent is to capture movement in what appears to be a lifeless environment. This is also my first attempt at photography.",
-      fr: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n@icewaves est une série de photographies prises sur un lac gelé près de la ville ou je vivais au Canada. L'objectif est de capturer le mouvement dans ce qui semble être un environnement sans vie. C'est aussi ma première tentative en photographie."
+      fr: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n@icewaves est une série de photographies prises sur un lac gelé près de la ville ou je vivais au Canada. L'objectif est de capturer le mouvement dans ce qui semble être un environnement sans vie. C'est aussi ma première tentative en photographie."
     },
     mediaFiles: [
       'cover.jpg',
