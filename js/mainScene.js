@@ -58,7 +58,15 @@ function init() {
   camera.position.z = CONFIG.CAMERA_DISTANCE;
 
   renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl'), antialias: true, alpha: true });
-  renderer.setPixelRatio(1); // LOCK to 1:1 pixel ratio on ALL devices
+  
+  // ADAPTIVE PIXEL RATIO FIX
+  // MacBook Air M1 reference: 2.0 pixel ratio
+  // This normalizes all devices to match your Mac's display
+  const targetPixelRatio = 2.0; // Your MacBook Air M1 ratio
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  const normalizedRatio = targetPixelRatio / devicePixelRatio;
+  renderer.setPixelRatio(normalizedRatio);
+  
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0xffffff, 1);
   renderer.outputColorSpace = THREE.SRGBColorSpace; 
@@ -514,6 +522,12 @@ function animate() {
 function onResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setPixelRatio(1); // LOCK to 1:1 ratio on resize
+  
+  // Recalculate normalized pixel ratio on resize
+  const targetPixelRatio = 2.0; // MacBook Air M1 reference
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  const normalizedRatio = targetPixelRatio / devicePixelRatio;
+  renderer.setPixelRatio(normalizedRatio);
+  
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
