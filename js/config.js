@@ -139,8 +139,8 @@ export const CONFIG = {
     POSITION_X: -13.75,              // World space X position
     POSITION_Y: 8.6,              // World space Y position  
     POSITION_Z: 0,                 // World space Z position
-    SIZE:       1,               // Scale in world space
-    CLICK_SCALE: 0.85,             // Scale on click
+    SIZE:       0.3,               // Scale in world space
+    CLICK_SCALE: 0.2,             // Scale on click
   },
 
   CONTACT_BUTTON: {
@@ -148,8 +148,8 @@ export const CONFIG = {
     POSITION_X: -11.5,               // World space X position
     POSITION_Y: 8.6,              // World space Y position
     POSITION_Z: 0,                 // World space Z position
-    SIZE:       1,               // Scale in world space
-    CLICK_SCALE: 0.85,             // Scale on click
+    SIZE:       0.3,               // Scale in world space
+    CLICK_SCALE: 0.2,             // Scale on click
   },
 
   ENGLISH_BUTTON: {
@@ -157,8 +157,8 @@ export const CONFIG = {
     POSITION_X: 12.25,              // World space X position
     POSITION_Y: 8.6,               // World space Y position
     POSITION_Z: 0,                 // World space Z position
-    SIZE:       6.5,               // Scale in world space
-    CLICK_SCALE: 0.85,             // Scale on click
+    SIZE:       0.3,               // Scale in world space
+    CLICK_SCALE: 0.2,             // Scale on click
     OPACITY_ACTIVE: 1.0,           // Opacity when this language is selected
     OPACITY_INACTIVE: 0.5,         // Opacity when other language is selected
   },
@@ -168,8 +168,8 @@ export const CONFIG = {
     POSITION_X: 13.75,             // World space X position
     POSITION_Y: 8.6,               // World space Y position
     POSITION_Z: 0,                 // World space Z position
-    SIZE:       6.5,               // Scale in world space
-    CLICK_SCALE: 0.85,             // Scale on click
+    SIZE:       0.3,               // Scale in world space
+    CLICK_SCALE: 0.2,             // Scale on click
     OPACITY_ACTIVE: 1.0,           // Opacity when this language is selected
     OPACITY_INACTIVE: 0.5,         // Opacity when other language is selected
   },
@@ -179,7 +179,7 @@ export const CONFIG = {
     POSITION_X: 13,            // World space X position (centered between EN and FR)
     POSITION_Y: 8.6,               // World space Y position
     POSITION_Z: 0,                 // World space Z position
-    SIZE:       6.5,               // Scale in world space
+    SIZE:       0.3,               // Scale in world space
   },
 
   // --- ABOUT & CONTACT SCENE IMAGES ---
