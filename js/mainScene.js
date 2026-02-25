@@ -3,6 +3,7 @@ import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.158.0/examples/j
 import { CONFIG } from './config.js';
 import { createGallery, createUIButtons } from './galleryScene.js';
 import { setupGalleryAnimation, cleanupGalleryAnimation } from './galleryAnimation.js';
+import { getCurrentLanguage } from './languageState.js';
 
 let scene, camera, renderer;
 let mainObject, secondObject, galleryGroup;
@@ -58,15 +59,6 @@ function init() {
   camera.position.z = CONFIG.CAMERA_DISTANCE;
 
   renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl'), antialias: true, alpha: true });
-  
-  // ADAPTIVE PIXEL RATIO FIX
-  // MacBook Air M1 reference: 2.0 pixel ratio
-  // This normalizes all devices to match your Mac's display
-  const targetPixelRatio = 2.0; // Your MacBook Air M1 ratio
-  const devicePixelRatio = window.devicePixelRatio || 1;
-  const normalizedRatio = targetPixelRatio / devicePixelRatio;
-  renderer.setPixelRatio(normalizedRatio);
-  
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0xffffff, 1);
   renderer.outputColorSpace = THREE.SRGBColorSpace; 
@@ -380,6 +372,21 @@ function launchGallery() {
     uiButtons = createUIButtons();
     uiButtons.forEach(btn => scene.add(btn));
     
+    // Set correct language button opacity based on current language
+    const currentLang = getCurrentLanguage();
+    const englishBtn = uiButtons.find(btn => btn.userData.isEnglishButton);
+    const frenchBtn = uiButtons.find(btn => btn.userData.isFrenchButton);
+    
+    if (englishBtn && frenchBtn) {
+      if (currentLang === 'en') {
+        englishBtn.material.opacity = CONFIG.ENGLISH_BUTTON.OPACITY_ACTIVE;
+        frenchBtn.material.opacity = CONFIG.FRENCH_BUTTON.OPACITY_INACTIVE;
+      } else {
+        englishBtn.material.opacity = CONFIG.ENGLISH_BUTTON.OPACITY_INACTIVE;
+        frenchBtn.material.opacity = CONFIG.FRENCH_BUTTON.OPACITY_ACTIVE;
+      }
+    }
+    
     galleryState = 'OPENING';
     
     const now = Date.now();
@@ -522,12 +529,5 @@ function animate() {
 function onResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-  
-  // Recalculate normalized pixel ratio on resize
-  const targetPixelRatio = 2.0; // MacBook Air M1 reference
-  const devicePixelRatio = window.devicePixelRatio || 1;
-  const normalizedRatio = targetPixelRatio / devicePixelRatio;
-  renderer.setPixelRatio(normalizedRatio);
-  
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
