@@ -139,7 +139,7 @@ export const CONFIG = {
     POSITION_X: -13.75,              // World space X position
     POSITION_Y: 8.6,              // World space Y position  
     POSITION_Z: 0,                 // World space Z position
-    SIZE:       6.5,               // Scale in world space
+    SIZE:       1,               // Scale in world space
     CLICK_SCALE: 0.85,             // Scale on click
   },
 
@@ -148,7 +148,7 @@ export const CONFIG = {
     POSITION_X: -11.5,               // World space X position
     POSITION_Y: 8.6,              // World space Y position
     POSITION_Z: 0,                 // World space Z position
-    SIZE:       6.5,               // Scale in world space
+    SIZE:       1,               // Scale in world space
     CLICK_SCALE: 0.85,             // Scale on click
   },
 
