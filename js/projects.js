@@ -6,16 +6,16 @@ export const ABOUT = {
   fr: {
     title: 'léon river\nmartin-bergot\n\ndesigner produit\nfranco canadien\n\n++étudiant en \nmaster design \nnumérique\nensaama paris',
   },
-  fontSize: 'clamp(32px, 6vw, 85px)',  // Responsive: scales with screen size
+  fontSize: '85px',
   fontFamily: 'TitleFont',
   fontWeight: 'bold',
   color: '#000000',
   textAlign: 'left',
-  letterSpacing: 'clamp(-3px, -0.5vw, -5px)',  // Responsive
+  letterSpacing: '-5px',
   lineHeight: '0.85',
-  marginTop: 'clamp(10px, 2vw, 20px)',  // Responsive
-  marginBottom: 'clamp(20px, 3vw, 40px)',  // Responsive
-  marginLeft: 'clamp(10px, 2vw, 20px)',  // Responsive
+  marginTop: '20px',
+  marginBottom: '40px',
+  marginLeft: '20px',
 };
 
 // Contact Page Content
@@ -26,16 +26,16 @@ export const CONTACT = {
   fr: {
     title: 'mail:leonmartinbergot@hotmail.com\ntel:+33 6 52 08 05 88\nig:@neptunhuh\nPARIS\n\n\n\n\n\n\n\n\nen recherche de stage\ncontactezmoisvp',
   },
-  fontSize: 'clamp(32px, 6vw, 85px)',  // Responsive
+  fontSize: '85px',
   fontFamily: 'TitleFont',
   fontWeight: 'bold',
   color: '#000000',
   textAlign: 'left',
-  letterSpacing: 'clamp(-3px, -0.5vw, -5px)',  // Responsive
+  letterSpacing: '-5px',
   lineHeight: '0.85',
-  marginTop: 'clamp(10px, 2vw, 20px)',  // Responsive
-  marginBottom: 'clamp(20px, 3vw, 40px)',  // Responsive
-  marginLeft: 'clamp(10px, 2vw, 20px)',  // Responsive
+  marginTop: '20px',
+  marginBottom: '40px',
+  marginLeft: '20px',
 };
 
 // Global Default Styles (Fallback)
