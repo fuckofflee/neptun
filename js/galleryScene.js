@@ -102,19 +102,8 @@ export function createUIButtons() {
   const buttons = [];
   const textureLoader = new THREE.TextureLoader();
 
-  // About button - use actual SVG dimensions
+  // About button - FIXED SIZE regardless of SVG pixel dimensions
   const aboutTexture = textureLoader.load(CONFIG.ABOUT_BUTTON.SVG_PATH, (texture) => {
-    // Get actual pixel dimensions of SVG
-    const pixelWidth = texture.image.width;
-    const pixelHeight = texture.image.height;
-    
-    // Apply SIZE as a scale factor to actual dimensions
-    const worldWidth = pixelWidth * 0.001 * CONFIG.ABOUT_BUTTON.SIZE;
-    const worldHeight = pixelHeight * 0.001 * CONFIG.ABOUT_BUTTON.SIZE;
-    
-    aboutButton.geometry.dispose();
-    aboutButton.geometry = new THREE.PlaneGeometry(worldWidth, worldHeight);
-    
     texture.anisotropy = 16;
     texture.minFilter = THREE.LinearFilter;
     texture.magFilter = THREE.LinearFilter;
@@ -127,8 +116,8 @@ export function createUIButtons() {
     side: THREE.DoubleSide,
     depthTest: false,
   });
-  // Start with 1x1 square, will resize when texture loads
-  const aboutGeometry = new THREE.PlaneGeometry(1, 1);
+  // Use CONFIG.SIZE directly as world units (no pixel scaling)
+  const aboutGeometry = new THREE.PlaneGeometry(CONFIG.ABOUT_BUTTON.SIZE, CONFIG.ABOUT_BUTTON.SIZE);
   const aboutButton = new THREE.Mesh(aboutGeometry, aboutMaterial);
   aboutButton.position.set(
     CONFIG.ABOUT_BUTTON.POSITION_X,
@@ -141,17 +130,8 @@ export function createUIButtons() {
   aboutButton.renderOrder = 999;
   buttons.push(aboutButton);
 
-  // Contact button - same approach
+  // Contact button - FIXED SIZE
   const contactTexture = textureLoader.load(CONFIG.CONTACT_BUTTON.SVG_PATH, (texture) => {
-    const pixelWidth = texture.image.width;
-    const pixelHeight = texture.image.height;
-    
-    const worldWidth = pixelWidth * 0.001 * CONFIG.CONTACT_BUTTON.SIZE;
-    const worldHeight = pixelHeight * 0.001 * CONFIG.CONTACT_BUTTON.SIZE;
-    
-    contactButton.geometry.dispose();
-    contactButton.geometry = new THREE.PlaneGeometry(worldWidth, worldHeight);
-    
     texture.anisotropy = 16;
     texture.minFilter = THREE.LinearFilter;
     texture.magFilter = THREE.LinearFilter;
@@ -164,7 +144,7 @@ export function createUIButtons() {
     side: THREE.DoubleSide,
     depthTest: false,
   });
-  const contactGeometry = new THREE.PlaneGeometry(1, 1);
+  const contactGeometry = new THREE.PlaneGeometry(CONFIG.CONTACT_BUTTON.SIZE, CONFIG.CONTACT_BUTTON.SIZE);
   const contactButton = new THREE.Mesh(contactGeometry, contactMaterial);
   contactButton.position.set(
     CONFIG.CONTACT_BUTTON.POSITION_X,
@@ -177,17 +157,8 @@ export function createUIButtons() {
   contactButton.renderOrder = 999;
   buttons.push(contactButton);
 
-  // English button
+  // English button - FIXED SIZE
   const englishTexture = textureLoader.load(CONFIG.ENGLISH_BUTTON.SVG_PATH, (texture) => {
-    const pixelWidth = texture.image.width;
-    const pixelHeight = texture.image.height;
-    
-    const worldWidth = pixelWidth * 0.001 * CONFIG.ENGLISH_BUTTON.SIZE;
-    const worldHeight = pixelHeight * 0.001 * CONFIG.ENGLISH_BUTTON.SIZE;
-    
-    englishButton.geometry.dispose();
-    englishButton.geometry = new THREE.PlaneGeometry(worldWidth, worldHeight);
-    
     texture.anisotropy = 16;
     texture.minFilter = THREE.LinearFilter;
     texture.magFilter = THREE.LinearFilter;
@@ -200,7 +171,7 @@ export function createUIButtons() {
     side: THREE.DoubleSide,
     depthTest: false,
   });
-  const englishGeometry = new THREE.PlaneGeometry(1, 1);
+  const englishGeometry = new THREE.PlaneGeometry(CONFIG.ENGLISH_BUTTON.SIZE, CONFIG.ENGLISH_BUTTON.SIZE);
   const englishButton = new THREE.Mesh(englishGeometry, englishMaterial);
   englishButton.position.set(
     CONFIG.ENGLISH_BUTTON.POSITION_X,
@@ -213,17 +184,8 @@ export function createUIButtons() {
   englishButton.renderOrder = 999;
   buttons.push(englishButton);
 
-  // French button
+  // French button - FIXED SIZE
   const frenchTexture = textureLoader.load(CONFIG.FRENCH_BUTTON.SVG_PATH, (texture) => {
-    const pixelWidth = texture.image.width;
-    const pixelHeight = texture.image.height;
-    
-    const worldWidth = pixelWidth * 0.001 * CONFIG.FRENCH_BUTTON.SIZE;
-    const worldHeight = pixelHeight * 0.001 * CONFIG.FRENCH_BUTTON.SIZE;
-    
-    frenchButton.geometry.dispose();
-    frenchButton.geometry = new THREE.PlaneGeometry(worldWidth, worldHeight);
-    
     texture.anisotropy = 16;
     texture.minFilter = THREE.LinearFilter;
     texture.magFilter = THREE.LinearFilter;
@@ -236,7 +198,7 @@ export function createUIButtons() {
     side: THREE.DoubleSide,
     depthTest: false,
   });
-  const frenchGeometry = new THREE.PlaneGeometry(1, 1);
+  const frenchGeometry = new THREE.PlaneGeometry(CONFIG.FRENCH_BUTTON.SIZE, CONFIG.FRENCH_BUTTON.SIZE);
   const frenchButton = new THREE.Mesh(frenchGeometry, frenchMaterial);
   frenchButton.position.set(
     CONFIG.FRENCH_BUTTON.POSITION_X,
@@ -249,17 +211,8 @@ export function createUIButtons() {
   frenchButton.renderOrder = 999;
   buttons.push(frenchButton);
 
-  // Language slash separator (non-interactive visual element)
+  // Language slash separator - FIXED SIZE
   const slashTexture = textureLoader.load(CONFIG.LANGUAGE_SLASH.SVG_PATH, (texture) => {
-    const pixelWidth = texture.image.width;
-    const pixelHeight = texture.image.height;
-    
-    const worldWidth = pixelWidth * 0.001 * CONFIG.LANGUAGE_SLASH.SIZE;
-    const worldHeight = pixelHeight * 0.001 * CONFIG.LANGUAGE_SLASH.SIZE;
-    
-    slashSeparator.geometry.dispose();
-    slashSeparator.geometry = new THREE.PlaneGeometry(worldWidth, worldHeight);
-    
     texture.anisotropy = 16;
     texture.minFilter = THREE.LinearFilter;
     texture.magFilter = THREE.LinearFilter;
@@ -272,7 +225,7 @@ export function createUIButtons() {
     side: THREE.DoubleSide,
     depthTest: false,
   });
-  const slashGeometry = new THREE.PlaneGeometry(1, 1);
+  const slashGeometry = new THREE.PlaneGeometry(CONFIG.LANGUAGE_SLASH.SIZE, CONFIG.LANGUAGE_SLASH.SIZE);
   const slashSeparator = new THREE.Mesh(slashGeometry, slashMaterial);
   slashSeparator.position.set(
     CONFIG.LANGUAGE_SLASH.POSITION_X,
