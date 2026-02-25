@@ -2,8 +2,11 @@ import { CONTACT } from './projects.js';
 import { CONFIG } from './config.js';
 import { getCurrentLanguage } from './languageState.js';
 
-function loadFonts() {
-  if (document.getElementById('contact-fonts')) return;
+async function loadFonts() {
+  if (document.getElementById('contact-fonts')) {
+    await document.fonts.ready;
+    return;
+  }
   const style = document.createElement('style');
   style.id = 'contact-fonts';
   let css = '';
@@ -12,6 +15,7 @@ function loadFonts() {
   });
   style.innerHTML = css;
   document.head.appendChild(style);
+  await document.fonts.ready;
 }
 
 function typewriteInto(el, text, speed = 40) {
@@ -28,8 +32,8 @@ function typewriteInto(el, text, speed = 40) {
   tick();
 }
 
-export function launchContactScene(renderer, onCloseCallback) {
-  loadFonts();
+export async function launchContactScene(renderer, onCloseCallback) {
+  await loadFonts();
   
   renderer.domElement.style.display    = 'none';
   renderer.domElement.style.visibility = 'hidden';
