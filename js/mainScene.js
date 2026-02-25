@@ -3,7 +3,6 @@ import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.158.0/examples/j
 import { CONFIG } from './config.js';
 import { createGallery, createUIButtons } from './galleryScene.js';
 import { setupGalleryAnimation, cleanupGalleryAnimation } from './galleryAnimation.js';
-import { getCurrentLanguage } from './languageState.js';
 
 let scene, camera, renderer;
 let mainObject, secondObject, galleryGroup;
@@ -59,6 +58,7 @@ function init() {
   camera.position.z = CONFIG.CAMERA_DISTANCE;
 
   renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl'), antialias: true, alpha: true });
+  renderer.setPixelRatio(1); // LOCK to 1:1 pixel ratio on ALL devices
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0xffffff, 1);
   renderer.outputColorSpace = THREE.SRGBColorSpace; 
@@ -372,21 +372,6 @@ function launchGallery() {
     uiButtons = createUIButtons();
     uiButtons.forEach(btn => scene.add(btn));
     
-    // Set correct language button opacity based on current language
-    const currentLang = getCurrentLanguage();
-    const englishBtn = uiButtons.find(btn => btn.userData.isEnglishButton);
-    const frenchBtn = uiButtons.find(btn => btn.userData.isFrenchButton);
-    
-    if (englishBtn && frenchBtn) {
-      if (currentLang === 'en') {
-        englishBtn.material.opacity = CONFIG.ENGLISH_BUTTON.OPACITY_ACTIVE;
-        frenchBtn.material.opacity = CONFIG.FRENCH_BUTTON.OPACITY_INACTIVE;
-      } else {
-        englishBtn.material.opacity = CONFIG.ENGLISH_BUTTON.OPACITY_INACTIVE;
-        frenchBtn.material.opacity = CONFIG.FRENCH_BUTTON.OPACITY_ACTIVE;
-      }
-    }
-    
     galleryState = 'OPENING';
     
     const now = Date.now();
@@ -529,5 +514,6 @@ function animate() {
 function onResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
+  renderer.setPixelRatio(1); // LOCK to 1:1 ratio on resize
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
